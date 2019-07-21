@@ -3,23 +3,33 @@ import {
     Post,
     Body,
     Put,
+    HttpException,
+    HttpStatus,
 } from '@nestjs/common';
 import { CrudController } from '../base/crud.controller';
 import { BudgetItem } from './budget-item.entity';
 // import { CreateBudgetDto } from './dtos/create-budget.dto';
 // import { UpdateBudgetDto } from './dtos/update-budget.dto';
 import { BudgetItemsService } from './budget-items.service';
+import { CreateBudgetItemDto } from './dtos/create-budget-item.dto';
 
 @Controller('budget-items')
-export class BudgetItemsController extends CrudController<BudgetItem>{
-
+export class BudgetItemsController extends CrudController<BudgetItem> {
     constructor(private readonly budgetItemsService: BudgetItemsService) {
-        super(budgetItemsService)
+        super(budgetItemsService);
     }
 
     @Post('create')
-    async create(@Body() budgetItemData: BudgetItem): Promise<BudgetItem> {
-        return await this.budgetItemsService.create(budgetItemData);
+    async create(
+        @Body() budgetItemData: CreateBudgetItemDto,
+    ): Promise<BudgetItem> {
+        const createdBudgetItem = await this.budgetItemsService.create(
+            budgetItemData,
+        );
+        if (!createdBudgetItem) {
+            throw new HttpException(`Bad Request`, HttpStatus.NOT_FOUND);
+        }
+        return createdBudgetItem;
     }
 
     // @Put()
@@ -28,5 +38,4 @@ export class BudgetItemsController extends CrudController<BudgetItem>{
     // ): Promise<number> {
     //     return this.budgetsService.update(budgetData);
     // }
-
 }

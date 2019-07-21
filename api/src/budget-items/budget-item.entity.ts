@@ -1,8 +1,4 @@
-import {
-    Entity,
-    Column,
-    ManyToOne,
-} from 'typeorm';
+import { Entity, Column, ManyToOne, TableForeignKey } from 'typeorm';
 import { CrudEntity } from '../base/crud.entity';
 import { Budget } from '../budget/budget.entity';
 

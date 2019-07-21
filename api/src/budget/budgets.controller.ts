@@ -1,9 +1,4 @@
-import {
-    Controller,
-    Post,
-    Body,
-    Put,
-} from '@nestjs/common';
+import { Controller, Post, Body, Put } from '@nestjs/common';
 import { CrudController } from '../base/crud.controller';
 import { Budget } from './budget.entity';
 import { CreateBudgetDto } from './dtos/create-budget.dto';
@@ -11,10 +6,9 @@ import { UpdateBudgetDto } from './dtos/update-budget.dto';
 import { BudgetsService } from './budgets.service';
 
 @Controller('budgets')
-export class BudgetsController extends CrudController<Budget>{
-
+export class BudgetsController extends CrudController<Budget> {
     constructor(private readonly budgetsService: BudgetsService) {
-        super(budgetsService)
+        super(budgetsService);
     }
 
     @Post('create')
@@ -23,10 +17,7 @@ export class BudgetsController extends CrudController<Budget>{
     }
 
     @Put()
-    async update(
-        @Body() budgetData: UpdateBudgetDto,
-    ): Promise<number> {
+    async update(@Body() budgetData: UpdateBudgetDto): Promise<number> {
         return this.budgetsService.update(budgetData);
     }
-
 }

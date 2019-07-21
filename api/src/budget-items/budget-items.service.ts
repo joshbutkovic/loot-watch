@@ -4,18 +4,21 @@ import { HttpStatus, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BudgetItem } from './budget-item.entity';
 import { CrudService } from '../base/crud.service';
+import { CreateBudgetItemDto } from './dtos/create-budget-item.dto';
 // import { CreateBudgetDto } from './dtos/create-budget.dto';
 // import { UpdateBudgetDto } from './dtos/update-budget.dto';
 
 @Injectable()
-export class BudgetItemsService extends CrudService<BudgetItem>{
+export class BudgetItemsService extends CrudService<BudgetItem> {
     constructor(
         @InjectRepository(BudgetItem)
-        private readonly budgetItemsRepository: Repository<BudgetItem>) {
+        private readonly budgetItemsRepository: Repository<BudgetItem>,
+    ) {
         super(budgetItemsRepository);
     }
 
-    async create(budgetItem: BudgetItem): Promise<BudgetItem> {
+    async create(budgetItem: CreateBudgetItemDto): Promise<BudgetItem> {
+        console.log(budgetItem);
         return await this.budgetItemsRepository.save(budgetItem);
     }
 
