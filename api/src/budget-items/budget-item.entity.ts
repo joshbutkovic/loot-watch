@@ -13,6 +13,10 @@ export class BudgetItem extends CrudEntity {
     @Column()
     amount: number;
 
+    @Column()
+    budgetId: number;
+
     @ManyToOne(type => Budget, budget => budget.budgetItems)
     budget: Budget;
+
 }

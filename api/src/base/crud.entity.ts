@@ -7,16 +7,15 @@ import {
     UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
-export abstract class CrudEntity {
+export class CrudEntity {
     @PrimaryGeneratedColumn()
     public id: number;
 
     @CreateDateColumn()
-    createdAt: Date;
+    public createdAt: Date;
 
     @UpdateDateColumn()
-    updatedAt: Date;
+    public updatedAt: Date;
 
     // @Column()
     // createdBy: string;

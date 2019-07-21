@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 
 export class CreateBudgetItemDto {
     readonly id: number;
@@ -8,6 +8,7 @@ export class CreateBudgetItemDto {
     readonly description: string;
     @IsNotEmpty()
     readonly amount: number;
+    @IsNotEmpty()
     readonly budgetId: number;
     readonly createdAt: Date;
     // readonly creadtedBy: string;
