@@ -20,21 +20,26 @@ export class BudgetItemsService extends CrudService<BudgetItem> {
     }
 
     async create(budgetItem: CreateBudgetItemDto): Promise<BudgetItem> {
-        try {
-            const budget = await this.budgetRepository.findOneOrFail({id: budgetItem.budgetId});
-            return await this.budgetItemsRepository.save(budgetItem);
-        } catch(err) {
-            return err;
+        const parentBudget = await this.budgetRepository.findOne(budgetItem.budgetId);
+        if(!parentBudget) {
+            throw new HttpException(
+                `Parent budget with ID ${budgetItem.id} is not found`,
+                HttpStatus.NOT_FOUND,
+            );
         }
+        return await this.budgetItemsRepository.save(budgetItem);
     }
 
     async update(budgetItem: UpdateBudgetItemDto): Promise<number> {
-        try {
-            const budgetToUpdate = await this.budgetItemsRepository.findOneOrFail(budgetItem.id);
-            await this.budgetItemsRepository.update(budgetToUpdate.id, budgetItem);
-            return await budgetItem.id;
-        } catch(err) {
-            return err;
+        const budgetItemToUpdate = await this.budgetItemsRepository.findOne(budgetItem.id);
+        if (!budgetItemToUpdate) {
+            throw new HttpException(
+                `Budget with an ID of ${budgetItem.id} is not found`,
+                HttpStatus.NOT_FOUND,
+            );
         }
+        await this.budgetItemsRepository.update(budgetItem.id, budgetItem);
+        return await budgetItem.id;
     }
+
 }

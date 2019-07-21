@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BudgetsModule } from './budget/budgets.module';
 import { BudgetItemsModule } from './budget-items/budget-items.module';
+import { TagsModule } from './tags/tags.module';
 
 // https://github.com/lujakob/nestjs-realworld-example-app
 @Module({
@@ -17,6 +18,7 @@ import { BudgetItemsModule } from './budget-items/budget-items.module';
       synchronize: true,
       // dropSchema: true
     }),
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

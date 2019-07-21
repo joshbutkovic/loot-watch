@@ -1,20 +1,18 @@
 import { Injectable, BadGatewayException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { HttpStatus, HttpException } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import { STATUS_CODES } from 'http';
 import { CrudServiceInterface } from './crud.service.interface';
 import { CrudEntity } from './crud.entity';
 
 @Injectable()
-export class CrudService<T extends CrudEntity> implements CrudServiceInterface<T>{
-    constructor(
-        private readonly genericRepository: Repository<T>) { }
+export class CrudService<T extends CrudEntity> implements CrudServiceInterface<T> {
 
-    // create(entity: any): Promise<number> {
+    constructor(private readonly genericRepository: Repository<T>) { }
+
+    // async create(dto: any): Promise<number> {
     //     try {
     //         return new Promise<number>((resolve, reject) => {
-    //             this.genericRepository.save(entity)
+    //             this.genericRepository.save(dto)
     //                 .then(created => resolve(created.id))
     //                 .catch(err => reject(err))
     //         })
@@ -23,6 +21,7 @@ export class CrudService<T extends CrudEntity> implements CrudServiceInterface<T
     //         throw new BadGatewayException(error);
     //     }
     // }
+
 
     async getAll(): Promise<T[]> {
         const items = await this.genericRepository.find();
@@ -39,14 +38,6 @@ export class CrudService<T extends CrudEntity> implements CrudServiceInterface<T
         }
         return item;
     }
-
-    // delete(id: number): number {
-    //     try {
-    //         this.genericRepository.deleteById(id)
-    //     } catch (error) {
-    //         throw new BadGatewayException(error);
-    //     }
-    // }
 
     async delete(id: number): Promise<number> {
         const itemToDelete = await this.genericRepository.findOne(id);

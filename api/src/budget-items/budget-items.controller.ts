@@ -8,8 +8,6 @@ import {
 } from '@nestjs/common';
 import { CrudController } from '../base/crud.controller';
 import { BudgetItem } from './budget-item.entity';
-// import { CreateBudgetDto } from './dtos/create-budget.dto';
-// import { UpdateBudgetDto } from './dtos/update-budget.dto';
 import { BudgetItemsService } from './budget-items.service';
 import { CreateBudgetItemDto } from './dtos/create-budget-item.dto';
 import { UpdateBudgetItemDto } from './dtos/update-budget-item.dto';
@@ -24,7 +22,6 @@ export class BudgetItemsController extends CrudController<BudgetItem> {
     async create(
         @Body() budgetItemData: CreateBudgetItemDto,
     ): Promise<BudgetItem> {
-        console.log(budgetItemData.budgetId);
         const createdBudgetItem = await this.budgetItemsService.create(
             budgetItemData,
         );
@@ -35,9 +32,7 @@ export class BudgetItemsController extends CrudController<BudgetItem> {
     }
 
     @Put()
-    async update(
-        @Body() budgetItemData: UpdateBudgetItemDto,
-    ): Promise<number> {
+    async update(@Body() budgetItemData: UpdateBudgetItemDto): Promise<number> {
         return this.budgetItemsService.update(budgetItemData);
     }
 }

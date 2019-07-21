@@ -1,16 +1,10 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateBudgetItemDto {
+export class CreateTagDto {
     readonly id: number;
 
     @IsNotEmpty()
     readonly name: string;
-
-    @IsNotEmpty()
-    readonly description: string;
-
-    @IsNotEmpty()
-    readonly amount: number;
 
     @IsNotEmpty()
     readonly budgetId: number;
@@ -18,7 +12,4 @@ export class CreateBudgetItemDto {
     readonly createdAt: Date;
 
     readonly updatedAt: Date;
-
-    // readonly creadtedBy: string;
-    // readonly updatedBy: string;
 }

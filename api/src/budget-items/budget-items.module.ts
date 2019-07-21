@@ -6,8 +6,8 @@ import { BudgetItem } from './budget-item.entity';
 import { Budget } from '../budget/budget.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([BudgetItem, Budget])],
-  controllers: [BudgetItemsController],
-  providers: [BudgetItemsService]
+    imports: [TypeOrmModule.forFeature([BudgetItem, Budget])],
+    controllers: [BudgetItemsController],
+    providers: [BudgetItemsService],
 })
 export class BudgetItemsModule {}
