@@ -22,7 +22,7 @@ export class TagsService extends CrudService<Tag> {
     async create(tag: CreateTagDto): Promise<Tag> {
         try {
             await this.budgetRepository.findOneOrFail(tag.budgetId);
-            return await this.tagRepository.save(budgetItem);
+            return await this.tagRepository.save(tag);
         } catch (error) {
             throw new HttpException(`Bad Request`, HttpStatus.BAD_REQUEST);
         }

@@ -4,6 +4,8 @@ import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
 
+// https://tea.ch/article/authentication-with-passport-jwt/
+
 @Injectable()
 export class UsersService {
     private saltRounds: number = 10;
