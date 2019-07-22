@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BudgetsModule } from './budget/budgets.module';
 import { BudgetItemsModule } from './budget-items/budget-items.module';
 import { TagsModule } from './tags/tags.module';
+import { AuthModule } from './auth/auth.module';
 
 // https://github.com/lujakob/nestjs-realworld-example-app
 @Module({
@@ -19,6 +20,7 @@ import { TagsModule } from './tags/tags.module';
       // dropSchema: true
     }),
     TagsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
