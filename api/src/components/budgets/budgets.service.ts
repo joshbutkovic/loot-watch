@@ -3,7 +3,7 @@ import { Repository } from 'typeorm';
 import { HttpStatus, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Budget } from './budget.entity';
-import { CrudService } from '../base/crud.service';
+import { CrudService } from '../../shared/base/crud.service';
 import { CreateBudgetDto } from './dtos/create-budget.dto';
 import { UpdateBudgetDto } from './dtos/update-budget.dto';
 
@@ -17,18 +17,20 @@ export class BudgetsService extends CrudService<Budget> {
     }
 
     async create(budget: CreateBudgetDto): Promise<Budget> {
-        return await this.budgetsRepository.save(budget);
+        try {
+            return await this.budgetsRepository.save(budget);
+        } catch (error) {
+            throw new HttpException(`Bad Request`, HttpStatus.BAD_REQUEST);
+        }
     }
 
     async update(budget: UpdateBudgetDto): Promise<number> {
-        const budgetToUpdate = await this.budgetsRepository.findOne(budget.id);
-        if (!budgetToUpdate) {
-            throw new HttpException(
-                `Budget with an ID of ${budget.id} is not found`,
-                HttpStatus.NOT_FOUND,
-            );
+        try {
+            await this.budgetsRepository.findOneOrFail(budget.id);
+            await this.budgetsRepository.update(budget.id, budget);
+            return await budget.id;
+        } catch (error) {
+            throw new HttpException(`Bad Request`, HttpStatus.BAD_REQUEST);
         }
-        await this.budgetsRepository.update(budget.id, budget);
-        return await budget.id;
     }
 }

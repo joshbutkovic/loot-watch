@@ -3,8 +3,8 @@ import { Repository } from 'typeorm';
 import { HttpStatus, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from './tag.entity';
-import { Budget } from '../budget/budget.entity';
-import { CrudService } from '../base/crud.service';
+import { Budget } from '../budgets/budget.entity';
+import { CrudService } from '../../shared/base/crud.service';
 import { CreateTagDto } from './dtos/create-tag.dto';
 import { UpdateTagDto } from './dtos/update-tag.dto';
 
@@ -20,25 +20,21 @@ export class TagsService extends CrudService<Tag> {
     }
 
     async create(tag: CreateTagDto): Promise<Tag> {
-        const parentBudget = await this.budgetRepository.findOne(tag.budgetId);
-        if (!parentBudget) {
-            throw new HttpException(
-                `Parent budget with ID ${tag.id} is not found`,
-                HttpStatus.NOT_FOUND,
-            );
+        try {
+            await this.budgetRepository.findOneOrFail(tag.budgetId);
+            return await this.tagRepository.save(budgetItem);
+        } catch (error) {
+            throw new HttpException(`Bad Request`, HttpStatus.BAD_REQUEST);
         }
-        return await this.tagRepository.save(tag);
     }
 
     async update(tag: UpdateTagDto): Promise<number> {
-        const tagToUpdate = await this.tagRepository.findOne(tag.id);
-        if (!tagToUpdate) {
-            throw new HttpException(
-                `Budget with an ID of ${tag.id} is not found`,
-                HttpStatus.NOT_FOUND,
-            );
+        try {
+            await this.tagRepository.findOneOrFail(tag.id);
+            await this.tagRepository.update(tag.id, tag);
+            return await tag.id;
+        } catch (error) {
+            throw new HttpException(`Bad Request`, HttpStatus.BAD_REQUEST);
         }
-        await this.tagRepository.update(tag.id, tag);
-        return await tag.id;
     }
 }

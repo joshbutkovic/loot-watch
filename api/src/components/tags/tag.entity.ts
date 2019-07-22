@@ -1,6 +1,6 @@
 import { Entity, Column, ManyToOne } from 'typeorm';
-import { CrudEntity } from '../base/crud.entity';
-import { Budget } from '../budget/budget.entity';
+import { CrudEntity } from '../../shared/base/crud.entity';
+import { Budget } from '../budgets/budget.entity';
 
 @Entity()
 export class Tag extends CrudEntity {

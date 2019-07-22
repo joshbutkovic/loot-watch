@@ -5,8 +5,10 @@ import {
     Put,
     HttpException,
     HttpStatus,
+    UsePipes,
 } from '@nestjs/common';
-import { CrudController } from '../base/crud.controller';
+import { CrudController } from '../../shared/base/crud.controller';
+import { ValidationPipe } from '../../shared/pipes/validation.pipe';
 import { Tag } from './tag.entity';
 import { TagsService } from './tags.service';
 import { CreateTagDto } from './dtos/create-tag.dto';
@@ -18,7 +20,8 @@ export class TagsController extends CrudController<Tag> {
         super(tagsService);
     }
 
-    @Post('create')
+    @Post()
+    @UsePipes(ValidationPipe)
     async create(@Body() tagData: CreateTagDto): Promise<Tag> {
         const createdTag = await this.tagsService.create(tagData);
         if (!createdTag) {
@@ -28,6 +31,7 @@ export class TagsController extends CrudController<Tag> {
     }
 
     @Put()
+    @UsePipes(ValidationPipe)
     async update(@Body() tagData: UpdateTagDto): Promise<number> {
         return this.tagsService.update(tagData);
     }

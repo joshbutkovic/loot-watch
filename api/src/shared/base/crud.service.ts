@@ -5,9 +5,9 @@ import { CrudServiceInterface } from './crud.service.interface';
 import { CrudEntity } from './crud.entity';
 
 @Injectable()
-export class CrudService<T extends CrudEntity> implements CrudServiceInterface<T> {
-
-    constructor(private readonly genericRepository: Repository<T>) { }
+export class CrudService<T extends CrudEntity>
+    implements CrudServiceInterface<T> {
+    constructor(private readonly genericRepository: Repository<T>) {}
 
     // async create(dto: any): Promise<number> {
     //     try {
@@ -22,19 +22,21 @@ export class CrudService<T extends CrudEntity> implements CrudServiceInterface<T
     //     }
     // }
 
-
     async getAll(): Promise<T[]> {
         const items = await this.genericRepository.find();
-        if(items.length === 0) {
-            throw new HttpException('No budgets found', HttpStatus.NOT_FOUND);
+        if (items.length === 0) {
+            throw new HttpException('No items found', HttpStatus.NOT_FOUND);
         }
         return items;
     }
 
     async findById(id: number): Promise<T> {
         const item = await this.genericRepository.findOne(id);
-        if(!item) {
-            throw new HttpException(`Entity with an ID of ${id} is not found`, HttpStatus.NOT_FOUND);
+        if (!item) {
+            throw new HttpException(
+                `Entity with an ID of ${id} is not found`,
+                HttpStatus.NOT_FOUND,
+            );
         }
         return item;
     }
@@ -42,7 +44,10 @@ export class CrudService<T extends CrudEntity> implements CrudServiceInterface<T
     async delete(id: number): Promise<number> {
         const itemToDelete = await this.genericRepository.findOne(id);
         if (!itemToDelete) {
-            throw new HttpException(`Entity with a ID of ${id} is not found`, HttpStatus.NOT_FOUND);
+            throw new HttpException(
+                `Entity with a ID of ${id} is not found`,
+                HttpStatus.NOT_FOUND,
+            );
         }
         await this.genericRepository.delete(id);
         return await id;

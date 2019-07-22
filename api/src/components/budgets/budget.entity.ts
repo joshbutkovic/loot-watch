@@ -1,5 +1,5 @@
 import { Entity, Column, OneToMany, JoinTable } from 'typeorm';
-import { CrudEntity } from '../base/crud.entity';
+import { CrudEntity } from '../../shared/base/crud.entity';
 import { BudgetItem } from '../budget-items/budget-item.entity';
 
 @Entity()

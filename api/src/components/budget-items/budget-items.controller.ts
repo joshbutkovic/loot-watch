@@ -5,8 +5,10 @@ import {
     Put,
     HttpException,
     HttpStatus,
+    UsePipes,
 } from '@nestjs/common';
-import { CrudController } from '../base/crud.controller';
+import { CrudController } from '../../shared/base/crud.controller';
+import { ValidationPipe } from '../../shared/pipes/validation.pipe';
 import { BudgetItem } from './budget-item.entity';
 import { BudgetItemsService } from './budget-items.service';
 import { CreateBudgetItemDto } from './dtos/create-budget-item.dto';
@@ -18,20 +20,16 @@ export class BudgetItemsController extends CrudController<BudgetItem> {
         super(budgetItemsService);
     }
 
-    @Post('create')
+    @Post()
+    @UsePipes(ValidationPipe)
     async create(
         @Body() budgetItemData: CreateBudgetItemDto,
     ): Promise<BudgetItem> {
-        const createdBudgetItem = await this.budgetItemsService.create(
-            budgetItemData,
-        );
-        if (!createdBudgetItem) {
-            throw new HttpException(`Bad Request`, HttpStatus.NOT_FOUND);
-        }
-        return createdBudgetItem;
+        return await this.budgetItemsService.create(budgetItemData);
     }
 
     @Put()
+    @UsePipes(ValidationPipe)
     async update(@Body() budgetItemData: UpdateBudgetItemDto): Promise<number> {
         return this.budgetItemsService.update(budgetItemData);
     }
