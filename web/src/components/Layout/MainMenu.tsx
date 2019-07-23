@@ -9,8 +9,8 @@ interface MainMenu {
 }
 
 const MainMenu: React.FC = () => {
-    const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
-    const handleOnClick = (): void => setIsHamburgerOpen(!isHamburgerOpen);
+    const [isHamburgerOpen, setIsHamburgerOpen] = useState<boolean>(false);
+    const handleOnClick = () => setIsHamburgerOpen(!isHamburgerOpen);
     return (
         <nav
             className="navbar is-dark"
@@ -26,10 +26,8 @@ const MainMenu: React.FC = () => {
                 >
                     <FontAwesomeIcon icon={faBalanceScale} />
                 </NavLink>
-
-                <a
-                    onClick={handleOnClick}
-                    role="button"
+                <button
+                    onClick={() => handleOnClick}
                     className="navbar-burger burger"
                     aria-label="menu"
                     aria-expanded="false"
@@ -38,7 +36,7 @@ const MainMenu: React.FC = () => {
                     <span aria-hidden="true" />
                     <span aria-hidden="true" />
                     <span aria-hidden="true" />
-                </a>
+                </button>
             </div>
             <div
                 id="main-menu-navbar"

@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import Welcome from '../Container/Welcome';
 import CreateBudget from '../Container/CreateBudget';
 import Login from '../Container/Login';
-import Register from '../Container/Register';
+import Register from '../Container/Register/Register';
 // import { PoseGroup } from 'react-pose';
 // import { RouteTransitionWrapper } from '../../../utils/poseAnimations';
 
