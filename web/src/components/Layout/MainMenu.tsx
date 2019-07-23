@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import classnames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBalanceScale } from '@fortawesome/free-solid-svg-icons';
+
+interface MainMenu {
+    isHamburgerOpen: boolean;
+}
 
 const MainMenu: React.FC = () => {
+    const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
+    const handleOnClick = (): void => setIsHamburgerOpen(!isHamburgerOpen);
     return (
-        <nav className="navbar" role="navigation" aria-label="main navigation">
+        <nav
+            className="navbar is-dark"
+            role="navigation"
+            aria-label="main navigation"
+        >
             <div className="navbar-brand">
-                <a className="navbar-item" href="https://bulma.io">
-                    <img
-                        src="https://bulma.io/images/bulma-logo.png"
-                        width="112"
-                        height="28"
-                    />
-                </a>
+                <NavLink
+                    exact
+                    to="/"
+                    className="navbar-item"
+                    activeClassName="is-active"
+                >
+                    <FontAwesomeIcon icon={faBalanceScale} />
+                </NavLink>
+
                 <a
+                    onClick={handleOnClick}
                     role="button"
                     className="navbar-burger burger"
                     aria-label="menu"
@@ -23,11 +40,67 @@ const MainMenu: React.FC = () => {
                     <span aria-hidden="true" />
                 </a>
             </div>
-
-            <div id="main-menu-navbar" className="navbar-menu">
+            <div
+                id="main-menu-navbar"
+                className={classnames('navbar-menu', {
+                    'is-active': isHamburgerOpen,
+                })}
+            >
                 <div className="navbar-start">
-                    <a className="navbar-item">Home</a>
-                    <a className="navbar-item">Documentation</a>
+                    <div className="navbar-item has-dropdown is-hoverable">
+                        <NavLink
+                            exact
+                            to="/"
+                            className="navbar-link"
+                            activeClassName="is-active"
+                        >
+                            Budgets
+                        </NavLink>
+                        <div className="navbar-dropdown is-boxed">
+                            <NavLink
+                                exact
+                                to="/cbudget"
+                                className="navbar-item"
+                                activeClassName="is-active"
+                            >
+                                Create
+                            </NavLink>
+                            <NavLink
+                                exact
+                                to="/budgets/edit"
+                                className="navbar-item"
+                                activeClassName="is-active"
+                            >
+                                Edit
+                            </NavLink>
+                            <NavLink
+                                exact
+                                to="/reports"
+                                className="navbar-item"
+                                activeClassName="is-active"
+                            >
+                                Export
+                            </NavLink>
+                        </div>
+                    </div>
+                </div>
+                <div className="navbar-end">
+                    <NavLink
+                        exact
+                        to="/login"
+                        className="navbar-item"
+                        activeClassName="is-active"
+                    >
+                        Login
+                    </NavLink>
+                    <NavLink
+                        exact
+                        to="/register"
+                        className="navbar-item"
+                        activeClassName="is-active"
+                    >
+                        Register
+                    </NavLink>
                 </div>
             </div>
         </nav>
