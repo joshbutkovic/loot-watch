@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
-import useForm from '../../../hooks/useForm';
+// import useForm from '../../../hooks/useForm';
+import useForm from 'react-hook-form';
+
+// https://github.com/bluebill1049/react-hook-form
 
 interface IRegisterForm {
     name: string;
@@ -21,22 +24,27 @@ const Register: React.FC = () => {
         password: '',
     };
 
-    const { values, handleOnChange, handleOnSubmit } = useForm(
-        initialValues,
-        register,
-    );
+    const { register, handleSubmit, errors } = useForm(); // initialise the hook
+    const onSubmit = (data: any) => {
+        console.log(data);
+    }; // callback when validation pass
 
-    function register(): void {
-        console.log(values);
-        axios
-            .post('/auth/register', values)
-            .then(function(response) {
-                console.log(response);
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
-    }
+    // const { values, handleOnChange, handleOnSubmit } = useForm(
+    //     initialValues,
+    //     register,
+    // );
+
+    // function register(): void {
+    //     console.log(values);
+    //     axios
+    //         .post('/auth/register', values)
+    //         .then(function(response) {
+    //             console.log(response);
+    //         })
+    //         .catch(function(error) {
+    //             console.log(error);
+    //         });
+    // }
 
     return (
         <div className="container">
@@ -45,9 +53,9 @@ const Register: React.FC = () => {
                     <div className="column is-6 is-offset-3">
                         <div className="card">
                             <div className="card-content login">
-                                <p className="title">Register for Loot Watch</p>
+                                <p className="title">Register</p>
                                 <p className="subtitle">100% Free</p>
-                                <form onSubmit={handleOnSubmit}>
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="field">
                                         <label className="label has-text-left">
                                             Name
