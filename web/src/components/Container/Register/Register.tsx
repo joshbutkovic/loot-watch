@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-// import useForm from '../../../hooks/useForm';
+import { regex } from '../../../utils/regex';
 import useForm from 'react-hook-form';
+import useHttpPost from '../../../hooks/useHttp';
 
 // https://github.com/bluebill1049/react-hook-form
 
@@ -12,27 +13,25 @@ interface IRegisterForm {
     password: string;
 }
 
-const Register: React.FC = () => {
-    // const [startDate, setStartDate] = useState(Date.parse(moment()));
+const initialValues: IRegisterForm = {
+    name: '',
+    email: '',
+    username: '',
+    password: '',
+};
+
+const Register: React.FC = props => {
+    const { register, errors, handleSubmit } = useForm();
     // const [isLoading, returnedEvents] = useHttpGet(GET_EVENTS_URL, [props.returnedEvents]);
-    // const [filteredEvents, setFilteredEvents] = useState([]);
-    // const initialEvents = returnedEvents;
-    const initialValues: IRegisterForm = {
-        name: '',
-        email: '',
-        username: '',
-        password: '',
-    };
-
-    const { register, handleSubmit, errors } = useForm(); // initialise the hook
+    const [isLoading, returnedData] = useHttpPost(
+        'localhost:5000/auth/register',
+        [props.returnedData],
+        {},
+    );
     const onSubmit = (data: any) => {
-        console.log(data);
-    }; // callback when validation pass
-
-    // const { values, handleOnChange, handleOnSubmit } = useForm(
-    //     initialValues,
-    //     register,
-    // );
+        alert(JSON.stringify(data));
+    };
+    console.log(errors);
 
     // function register(): void {
     //     console.log(values);
@@ -66,9 +65,12 @@ const Register: React.FC = () => {
                                                 type="text"
                                                 placeholder="Name"
                                                 name="name"
-                                                onChange={handleOnChange}
-                                                value={values.name}
-                                                required
+                                                ref={register({
+                                                    required: true,
+                                                    minLength: 2,
+                                                    maxLength: 128,
+                                                    pattern: regex.name,
+                                                })}
                                             />
                                         </div>
                                     </div>
@@ -82,9 +84,12 @@ const Register: React.FC = () => {
                                                 type="email"
                                                 placeholder="Email address"
                                                 name="email"
-                                                onChange={handleOnChange}
-                                                value={values.email}
-                                                required
+                                                ref={register({
+                                                    required: true,
+                                                    minLength: 6,
+                                                    maxLength: 128,
+                                                    pattern: regex.email,
+                                                })}
                                             />
                                         </div>
                                     </div>
@@ -98,9 +103,12 @@ const Register: React.FC = () => {
                                                 type="text"
                                                 placeholder="Username"
                                                 name="username"
-                                                onChange={handleOnChange}
-                                                value={values.username}
-                                                required
+                                                ref={register({
+                                                    required: true,
+                                                    minLength: 5,
+                                                    maxLength: 64,
+                                                    pattern: regex.username,
+                                                })}
                                             />
                                         </div>
                                     </div>
@@ -114,9 +122,12 @@ const Register: React.FC = () => {
                                                 type="text"
                                                 placeholder="Password"
                                                 name="password"
-                                                onChange={handleOnChange}
-                                                value={values.password}
-                                                required
+                                                ref={register({
+                                                    required: true,
+                                                    minLength: 5,
+                                                    maxLength: 64,
+                                                    pattern: regex.password,
+                                                })}
                                             />
                                         </div>
                                     </div>

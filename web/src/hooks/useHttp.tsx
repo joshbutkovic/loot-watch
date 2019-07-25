@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export const useHttpGet = (url: string, dependencies: any) => {
+const useHttpPost = (url: string, dependencies: any, data?: any) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [returnedEvents, setReturnedEvents] = useState(null);
+    const [returnedData, setReturnedData] = useState(null);
 
     useEffect(() => {
         setIsLoading(true);
         axios
-            .get(url)
+            .post(url)
             .then(function(response) {
                 setIsLoading(false);
-                setReturnedEvents(response.data);
+                setReturnedData(response.data);
             })
             .catch(function(error) {
                 setIsLoading(false);
@@ -19,26 +19,6 @@ export const useHttpGet = (url: string, dependencies: any) => {
             });
     }, dependencies);
 
-    return [isLoading, returnedEvents];
+    return [isLoading, returnedData];
 };
-
-// export const useHttpPost = (url: string, dependencies: any) => {
-//     const [isLoading, setIsLoading] = useState(false);
-//     const [returnedEvents, setReturnedEvents] = useState(null);
-
-//     useEffect(() => {
-//         setIsLoading(true);
-//         axios
-//             .get(url)
-//             .then(function(response) {
-//                 setIsLoading(false);
-//                 setReturnedEvents(response.data);
-//             })
-//             .catch(function(error) {
-//                 setIsLoading(false);
-//                 console.log(error);
-//             });
-//     }, dependencies);
-
-//     return [isLoading, returnedEvents];
-// };
+export default useHttpPost;

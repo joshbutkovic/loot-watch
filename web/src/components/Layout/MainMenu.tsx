@@ -10,7 +10,9 @@ interface MainMenu {
 
 const MainMenu: React.FC = () => {
     const [isHamburgerOpen, setIsHamburgerOpen] = useState<boolean>(false);
-    const handleOnClick = () => setIsHamburgerOpen(!isHamburgerOpen);
+    const handleOnClick = (): void => setIsHamburgerOpen(!isHamburgerOpen);
+    const handleLinkClick = (): void => setIsHamburgerOpen(!isHamburgerOpen);
+
     return (
         <nav
             className="navbar is-dark"
@@ -23,11 +25,12 @@ const MainMenu: React.FC = () => {
                     to="/"
                     className="navbar-item"
                     activeClassName="is-active"
+                    onClick={handleLinkClick}
                 >
                     <FontAwesomeIcon icon={faBalanceScale} />
                 </NavLink>
                 <button
-                    onClick={() => handleOnClick}
+                    onClick={handleOnClick}
                     className="navbar-burger burger"
                     aria-label="menu"
                     aria-expanded="false"
@@ -51,6 +54,7 @@ const MainMenu: React.FC = () => {
                             to="/"
                             className="navbar-link"
                             activeClassName="is-active"
+                            onClick={handleLinkClick}
                         >
                             Budgets
                         </NavLink>
@@ -60,6 +64,7 @@ const MainMenu: React.FC = () => {
                                 to="/cbudget"
                                 className="navbar-item"
                                 activeClassName="is-active"
+                                onClick={handleLinkClick}
                             >
                                 Create
                             </NavLink>
@@ -68,6 +73,7 @@ const MainMenu: React.FC = () => {
                                 to="/budgets/edit"
                                 className="navbar-item"
                                 activeClassName="is-active"
+                                onClick={handleLinkClick}
                             >
                                 Edit
                             </NavLink>
@@ -76,6 +82,7 @@ const MainMenu: React.FC = () => {
                                 to="/reports"
                                 className="navbar-item"
                                 activeClassName="is-active"
+                                onClick={handleLinkClick}
                             >
                                 Export
                             </NavLink>
@@ -88,6 +95,7 @@ const MainMenu: React.FC = () => {
                         to="/login"
                         className="navbar-item"
                         activeClassName="is-active"
+                        onClick={handleLinkClick}
                     >
                         Login
                     </NavLink>
@@ -96,6 +104,7 @@ const MainMenu: React.FC = () => {
                         to="/register"
                         className="navbar-item"
                         activeClassName="is-active"
+                        onClick={handleLinkClick}
                     >
                         Register
                     </NavLink>

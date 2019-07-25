@@ -3,18 +3,18 @@ import { CrudEntity } from '../../shared/base/crud.entity';
 
 @Entity()
 export class User extends CrudEntity {
-    @Column({ length: 50, unique: true })
-    username: string;
-
-    @Column({ length: 100 })
+    @Column({ length: 128 })
     name: string;
 
-    @Column({ length: 100, nullable: true })
+    @Column({ length: 128 })
+    email: string;
+
+    @Column({ length: 64, unique: true })
+    username: string;
+
+    @Column({ length: 16, nullable: true })
     password: string | undefined;
 
-    @Column({ length: 100, nullable: true })
+    @Column({ length: 16, nullable: true })
     passwordHash: string | undefined;
-
-    @Column({ length: 500 })
-    email: string;
 }

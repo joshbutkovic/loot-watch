@@ -5,7 +5,7 @@ const CreateBudget: React.FC = () => {
         <div className="container">
             <section className="section">
                 <div className="columns">
-                    <h1 className="is-2 is-link has-text-light">
+                    <h1 className="is-2 is-link has-text-dark">
                         Create a New Budget
                     </h1>
                 </div>

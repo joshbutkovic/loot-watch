@@ -20,8 +20,9 @@
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
         "react-fontawesome": "^1.6.1",
-        "react-hook-form": "^3.18.10",
+        "react-hook-form": "^3.18.14",
         "react-pose": "^4.0.8",
+        "react-pose-text": "^3.1.0",
         "react-router-dom": "^5.0.1",
         "react-scripts": "3.0.1",
         "typescript": "3.5.3"
