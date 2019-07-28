@@ -9,7 +9,6 @@
         "@fortawesome/react-fontawesome": "^0.1.4",
         "@types/jest": "24.0.15",
         "@types/node": "12.6.8",
-        "@types/react": "16.8.23",
         "@types/react-dom": "16.8.4",
         "@types/react-router-dom": "^4.3.4",
         "axios": "^0.19.0",
@@ -23,8 +22,13 @@
         "react-hook-form": "^3.18.14",
         "react-pose": "^4.0.8",
         "react-pose-text": "^3.1.0",
+        "react-redux": "^7.1.0",
         "react-router-dom": "^5.0.1",
         "react-scripts": "3.0.1",
+        "redux": "^4.0.4",
+        "redux-react-hook": "^3.3.2",
+        "redux-thunk": "^2.3.0",
+        "thunk": "0.0.1",
         "typescript": "3.5.3"
     },
     "scripts": {
@@ -50,6 +54,9 @@
         ]
     },
     "devDependencies": {
-        "@types/classnames": "^2.2.9"
+        "@types/classnames": "^2.2.9",
+        "@types/react": "^16.8.23",
+        "@types/react-redux": "^7.1.1",
+        "@types/redux-devtools-extension": "^2.13.2"
     }
 }

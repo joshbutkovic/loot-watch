@@ -23,11 +23,11 @@ const initialValues: IRegisterForm = {
 const Register: React.FC = props => {
     const { register, errors, handleSubmit } = useForm();
     // const [isLoading, returnedEvents] = useHttpGet(GET_EVENTS_URL, [props.returnedEvents]);
-    const [isLoading, returnedData] = useHttpPost(
-        'localhost:5000/auth/register',
-        [props.returnedData],
-        {},
-    );
+    // const [isLoading, returnedData] = useHttpPost(
+    //     'localhost:5000/auth/register',
+    //     [props.returnedData],
+    //     {},
+    // );
     const onSubmit = (data: any) => {
         alert(JSON.stringify(data));
     };
