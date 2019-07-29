@@ -1,17 +1,29 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { LOGIN_USER } from '../../store/actions/types';
 import { regex } from './../../utils/regex';
+import { loginUser } from '../../store/actions/authActions';
 import useForm from 'react-hook-form';
 
-const Login: React.FC = () => {
+const Login: React.FC = props => {
     const dispatch = useDispatch();
     const { register, errors, handleSubmit } = useForm();
-    const onSubmit = (data: any): void => {
-        alert(JSON.stringify(data));
-        dispatch({ type: LOGIN_USER, payload: data });
+    // const auth = useSelector(state => state.auth);
+    const history = props;
+    const onSubmit = (data: any) => {
+        // // console.log({ username: data.username, password: data.password });
+        // // const dis = dispatch({
+        // //     type: LOGIN_USER,
+        // //     payload: { username: data.username, password: data.password },
+        // // });
+        dispatch(
+            loginUser(
+                { username: data.username, password: data.password },
+                history,
+            ),
+        );
     };
-    console.log(errors);
+    // console.log(errors);
     return (
         <div className="container">
             <section className="section">
@@ -31,11 +43,12 @@ const Login: React.FC = () => {
                                                 type="text"
                                                 placeholder="Username"
                                                 name="username"
+                                                // value="joshb_lv"
                                                 ref={register({
-                                                    required: true,
-                                                    minLength: 2,
-                                                    maxLength: 128,
-                                                    pattern: regex.username,
+                                                    // required: true,
+                                                    // minLength: 2,
+                                                    // maxLength: 128,
+                                                    // pattern: regex.username,
                                                 })}
                                             />
                                         </div>
@@ -51,10 +64,10 @@ const Login: React.FC = () => {
                                                 placeholder="Password"
                                                 name="password"
                                                 ref={register({
-                                                    required: true,
-                                                    minLength: 5,
-                                                    maxLength: 64,
-                                                    pattern: regex.password,
+                                                    // required: true,
+                                                    // minLength: 5,
+                                                    // maxLength: 64,
+                                                    // pattern: regex.password,
                                                 })}
                                             />
                                         </div>

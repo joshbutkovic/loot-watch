@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import { regex } from '../../../utils/regex';
 import useForm from 'react-hook-form';
 import useHttpPost from '../../../hooks/useHttp';
@@ -29,7 +28,7 @@ const Register: React.FC = props => {
     //     {},
     // );
     const onSubmit = (data: any) => {
-        alert(JSON.stringify(data));
+        console.log(data);
     };
     console.log(errors);
 
