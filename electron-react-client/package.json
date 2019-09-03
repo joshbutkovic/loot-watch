@@ -75,6 +75,7 @@
         "concurrently": "^4.1.0",
         "electron": "^4.0.6",
         "electron-builder": "^20.38.5",
+        "eslint-utils": "^1.4.2",
         "typescript": "^3.3.3333",
         "wait-on": "^3.2.0"
     }
