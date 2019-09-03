@@ -12,10 +12,10 @@ export class AuthService {
         const user = { username };
         const token = jwt.sign(user, secretOrKey, { expiresIn });
 
-        return { expires_in: expiresIn, token };
+        return { username, expires_in: expiresIn, token };
     }
 
-    async validateUser(signedUser): Promise<boolean> {
+    async validateUser(signedUser: any): Promise<boolean> {
         if (signedUser && signedUser.username) {
             return Boolean(
                 this.usersService.getUserByUsername(signedUser.username),

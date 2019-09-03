@@ -1,0 +1,81 @@
+{
+    "name": "electron-react-client",
+    "description": "Loot Watch Electon",
+    "version": "0.1.0",
+    "private": true,
+    "author": {
+        "name": "Josh Butkovic",
+        "email": "joshbutkovic@gmail.com",
+        "url": "https://www.loot-watch.com"
+    },
+    "build": {
+        "appId": "com.lw.lootwatch",
+        "productName": "Loot Watch",
+        "copyright": "Copyright © 2019 ${author}",
+        "mac": {
+            "category": "public.budget.utilities"
+        },
+        "files": [
+            "build/**/*",
+            "node_modules/**/*"
+        ],
+        "directories": {
+            "buildResources": "assets"
+        }
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^1.2.19",
+        "@fortawesome/free-brands-svg-icons": "^5.9.0",
+        "@fortawesome/free-solid-svg-icons": "^5.9.0",
+        "@fortawesome/react-fontawesome": "^0.1.4",
+        "@types/jest": "24.0.15",
+        "@types/node": "12.6.8",
+        "@types/react-dom": "16.8.4",
+        "@types/react-router-dom": "^4.3.4",
+        "axios": "^0.19.0",
+        "bulma": "^0.7.5",
+        "classnames": "^2.2.6",
+        "electron-is-dev": "^1.0.1",
+        "moment": "^2.24.0",
+        "node-sass": "^4.12.0",
+        "react": "^16.8.3",
+        "react-dom": "^16.8.3",
+        "react-fontawesome": "^1.6.1",
+        "react-hook-form": "^3.18.14",
+        "react-pose": "^4.0.8",
+        "react-pose-text": "^3.1.0",
+        "react-router-dom": "^5.0.1",
+        "react-scripts": "2.1.5"
+    },
+    "homepage": "./",
+    "main": "public/electron.js",
+    "scripts": {
+        "start": "rescripts start",
+        "build": "rescripts build",
+        "test": "rescripts test",
+        "eject": "react-scripts eject",
+        "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+        "postinstall": "electron-builder install-app-deps",
+        "preelectron-pack": "yarn build",
+        "electron-pack": "electron-builder -m"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ],
+    "devDependencies": {
+        "@rescripts/cli": "^0.0.10",
+        "@rescripts/rescript-env": "^0.0.5",
+        "@types/classnames": "^2.2.9",
+        "concurrently": "^4.1.0",
+        "electron": "^4.0.6",
+        "electron-builder": "^20.38.5",
+        "typescript": "^3.3.3333",
+        "wait-on": "^3.2.0"
+    }
+}

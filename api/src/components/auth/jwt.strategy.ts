@@ -12,12 +12,13 @@ export class JwtStrategy extends Strategy {
                 passReqToCallback: true,
                 secretOrKey: 'secret',
             },
-            async (req, payload, next) => await this.verify(req, payload, next),
+            async (req: Request, payload, next) =>
+                await this.verify(req, payload, next),
         );
         passport.use(this);
     }
 
-    public async verify(req, payload, done) {
+    public async verify(req: Request, payload, done) {
         const isValid = await this.authService.validateUser(payload);
         if (!isValid) {
             return done('Unauthorized', false);
