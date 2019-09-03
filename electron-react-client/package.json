@@ -72,6 +72,7 @@
         "@rescripts/cli": "^0.0.10",
         "@rescripts/rescript-env": "^0.0.5",
         "@types/classnames": "^2.2.9",
+        "@types/history": "^4.7.3",
         "concurrently": "^4.1.0",
         "electron": "^4.0.6",
         "electron-builder": "^20.38.5",

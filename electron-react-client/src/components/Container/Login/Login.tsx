@@ -5,13 +5,17 @@ import moment from 'moment';
 import useForm from 'react-hook-form';
 import PageSection from '../../Layout/PageSection/PageSection';
 
-interface Login {
+interface LoginState {
     username: string;
     password: string;
 }
 
-const Login = (props: any) => {
-    const [login, setLogin] = useState('');
+interface LoginProps {
+    history?: any;
+}
+
+const Login = (props: LoginProps) => {
+    const [login, setLogin] = useState<LoginState | undefined>(undefined);
     const { register, handleSubmit, errors } = useForm();
 
     useEffect(() => {
@@ -41,7 +45,7 @@ const Login = (props: any) => {
         loginUser();
     }, [login, props.history]);
 
-    async function onSubmit(data: any): Promise<any> {
+    async function onSubmit(data: any | undefined) {
         setLogin(data);
     }
 
