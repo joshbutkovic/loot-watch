@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import moment from 'moment';
+// import axios from 'axios';
+// import moment from 'moment';
 // import { regex } from '../../../utils/regex';
 import useForm from 'react-hook-form';
 import PageSection from '../../Layout/PageSection/PageSection';
@@ -21,26 +21,26 @@ const Login = (props: LoginProps) => {
     useEffect(() => {
         if (!login) return;
         const loginUser = async () => {
-            try {
-                const result = await axios.post(
-                    'http://localhost:5000/auth/login',
-                    login,
-                );
-                const { data } = result;
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('expires_in', data.expires_in);
-                localStorage.setItem(
-                    'expiryDateTime',
-                    moment()
-                        .add(data.expires_in, 'seconds')
-                        .toString(),
-                );
-                localStorage.setItem('username', data.username);
-                props.history.push('/cbudget');
-            } catch (err) {
-                //TODO: display forbidden error messag
-                console.log(err);
-            }
+            // try {
+            //     const result = await axios.post(
+            //         'http://localhost:5000/auth/login',
+            //         login,
+            //     );
+            //     const { data } = result;
+            //     localStorage.setItem('token', data.token);
+            //     localStorage.setItem('expires_in', data.expires_in);
+            //     localStorage.setItem(
+            //         'expiryDateTime',
+            //         moment()
+            //             .add(data.expires_in, 'seconds')
+            //             .toString(),
+            //     );
+            //     localStorage.setItem('username', data.username);
+            //     props.history.push('/cbudget');
+            // } catch (err) {
+            //     //TODO: display forbidden error messag
+            //     console.log(err);
+            // }
         };
         loginUser();
     }, [login, props.history]);
