@@ -1,0 +1,43 @@
+// @import './normalize.scss';
+@import '~antd/dist/antd.css';
+@import './colors.scss';
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap');
+
+$fontFamily: 'PT Sans', sans-serif;
+
+body {
+    // background: $bgColor;
+    // color: $white;
+    font-family: $fontFamily;
+}
+
+/* Structure */
+.container {
+    margin: 2rem 1rem;
+}
+
+/* Headings */
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: $fontFamily;
+    color: $white;
+}
+
+h1 {
+    font-size: 1.75rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+h4 {
+    font-size: 1.125rem;
+}
