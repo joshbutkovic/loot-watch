@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 // import { NavLink } from 'react-router-dom';
+import HamburgerIcon from './HamburgerIcon/HamburgerIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { colors } from '../../../theme';
-import { Menu, Icon } from 'antd';
+import { Input, Menu, Icon } from 'semantic-ui-react';
 
-const { SubMenu } = Menu;
 import './MainMenu.scss';
 
 interface MainMenu {
@@ -11,42 +12,45 @@ interface MainMenu {
 }
 
 const MainMenu: React.FC = () => {
-    const [current, setCurrent] = useState<string>('menu');
+    const [activeItem, setActiveItem] = useState<string>('home');
     // const handleOnClick = (): void => setIsHamburgerOpen(!isHamburgerOpen);
     // const handleLinkClick = (): void => setIsHamburgerOpen(!isHamburgerOpen);
     const handleClick = (e: any) => {
-        setCurrent(e.key);
+        setActiveItem(e.key);
         console.log('handleclick called');
     };
 
     return (
-        <Menu
-            theme="dark"
-            onClick={handleClick}
-            selectedKeys={[current]}
-            mode="horizontal"
-        >
-            <SubMenu
-                title={
-                    <span className="submenu-title-wrapper">
-                        <Icon type="setting" />
-                        Navigation Three - Submenu
-                    </span>
-                }
+        <Menu secondary>
+            <Menu.Item
+                name="hamburger"
+                active={activeItem === 'hamburger'}
+                onClick={handleClick}
             >
-                <Menu.ItemGroup title="Item 1">
-                    <Menu.Item key="setting:1">Option 1</Menu.Item>
-                    <Menu.Item key="setting:2">Option 2</Menu.Item>
-                </Menu.ItemGroup>
-                <Menu.ItemGroup title="Item 2">
-                    <Menu.Item key="setting:3">Option 3</Menu.Item>
-                    <Menu.Item key="setting:4">Option 4</Menu.Item>
-                </Menu.ItemGroup>
-            </SubMenu>
-            <Menu.Item key="mail">
-                <Icon type="mail" />
-                Navigation One
+                <Icon name="grid layout" />
             </Menu.Item>
+            <Menu.Item
+                name="home"
+                active={activeItem === 'home'}
+                onClick={handleClick}
+            />
+            <Menu.Item
+                name="messages"
+                active={activeItem === 'messages'}
+                onClick={handleClick}
+            />
+            <Menu.Item
+                name="friends"
+                active={activeItem === 'friends'}
+                onClick={handleClick}
+            />
+            <Menu.Menu position="right">
+                <Menu.Item
+                    name="logout"
+                    active={activeItem === 'logout'}
+                    onClick={handleClick}
+                />
+            </Menu.Menu>
         </Menu>
     );
 };
