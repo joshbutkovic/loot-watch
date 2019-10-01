@@ -11,14 +11,14 @@ import { connect } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 const MainMenu: React.FC = () => {
-    const [sideMenuDom, setSideMenuOpenDom] = useState<
-        React.RefObject<HTMLDivElement> | undefined
-    >(undefined);
+    // const [sideMenuDom, setSideMenuOpenDom] = useState<
+    //     React.RefObject<HTMLDivElement> | undefined
+    // >(undefined);
     const [isSideMenuOpen, setIsSideMenuOpen] = useState<boolean>(false);
 
     useEffect(() => {
-        const node = React.createRef<HTMLDivElement>();
-        setSideMenuOpenDom(node);
+        // const node = React.createRef<HTMLDivElement>();
+        // setSideMenuOpenDom(node);
     }, []);
 
     const handleHamburgerClick = (): void => {
@@ -27,7 +27,6 @@ const MainMenu: React.FC = () => {
 
     const handleOutsideClick = (e: MouseEvent): void => {
         let target = e.target as HTMLElement;
-        console.log(target.classList);
         if (
             !target.classList.contains('menu') ||
             !target.classList.contains('nav-container')
@@ -50,7 +49,7 @@ const MainMenu: React.FC = () => {
                     </OutsideClickHandler>
                 </div>
             </nav>
-            <SideMenu ref={sideMenuDom} isOpen={isSideMenuOpen} />
+            <SideMenu isOpen={isSideMenuOpen} />
         </>
     );
 };
