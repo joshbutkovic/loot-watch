@@ -1,5 +1,5 @@
 import React from 'react';
-import MainMenu from './components/Layout/MainMenu/MainMenu';
+import TopMenu from './components/Layout/TopMenu/MainMenu';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import RouterContainer from './components/Layout/RouterContainer';
@@ -12,7 +12,6 @@ import { ThunkAction } from 'redux-thunk';
 import store from './store/store';
 library.add(faCheckSquare, faCoffee);
 import './App.scss';
-// import 'antd/dist/antd.css';
 // import './colors.scss';
 
 interface State {
@@ -26,9 +25,11 @@ const App: React.FC = () => {
     return (
         <Provider store={store}>
             <Router>
-                <MainMenu />
-                <div className="container">
-                    <RouterContainer />
+                <TopMenu />
+                <div className="row">
+                    <div className="col col-lg-12">
+                        <RouterContainer />
+                    </div>
                 </div>
             </Router>
         </Provider>

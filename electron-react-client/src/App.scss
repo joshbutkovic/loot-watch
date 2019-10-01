@@ -1,6 +1,9 @@
-@import './normalize.scss';
+// @import './normalize.scss';
+@import 'mustard-ui/src/scss/mustard-ui.scss';
 @import './colors.scss';
 @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&display=swap');
+
+// Mustard UI Overrides
 
 $fontFamily: 'PT Sans', sans-serif;
 
@@ -10,7 +13,6 @@ html {
 
 body {
     background: $bgColor;
-    color: $white;
     font-family: $fontFamily;
 }
 
