@@ -3,7 +3,7 @@ import React from 'react';
 const Welcome: React.FC = () => {
     return (
         <div className="">
-            <h1 className="">Welcome to Loot Watch</h1>
+            <h1 className="">LW</h1>
         </div>
     );
 };

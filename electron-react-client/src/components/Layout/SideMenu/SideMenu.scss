@@ -10,6 +10,17 @@ ul {
         background: #545454;
         box-shadow: none;
         transition: all 250ms ease-in-out;
+        a {
+            li.menu-item {
+                padding: 16px 32px;
+            }
+            h5 {
+                padding-left: 1rem;
+            }
+
+            h3.menu-title {
+            }
+        }
         &.is-open {
             left: 0;
             opacity: 1;
